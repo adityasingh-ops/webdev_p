@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scaler Social</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(202, 227, 227);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #3417b6;
+
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+
+
+            color: white;
+            margin: 0px 0px 0px 0px;
+        }
+
+
+        textarea {
+            width: 40%;
+            height: 200px;
+            margin-bottom: 10px;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #3417b6;
+            color: white;
+            font-weight: 300;
+            width: 100px;
+            cursor: pointer;
+            border: 2px solid rgb(226, 224, 224);
+            border-radius: 50px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .response-container {
+            position: relative;
+            float: right;
+            margin-top: 90px;
+            height: 1000px;
+            width: 400px;
+            background-color: rgb(188, 212, 234);
+        }
+
+        .response-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background-color: aliceblue;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+
+        .response {
+            margin-bottom: 10px;
+            padding: 10px;
+            height: 200px;
+            width: 400px;
+            background-color: #ffffff;
+            border: 2px solid #1c0101;
+            border-radius: 20px;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <img
+            src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/033/original/SST_Logo.png?1706888781">
+        <img
+            src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/032/original/scaler-social.png?1706888764">
+    </nav>
+    <hr>
+
+    <div id="responseContainer">
+        <img src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/031/original/profile_image.png?1706888739"
+            alt="Photo" style="position: absolute; top: 90px; left: 10px;">
+        <form id="responseForm">
+            <textarea id="responseInput" placeholder="  Write your thoughts here" maxlength="100"></textarea>
+            <button type="submit">Post</button>
+        </form>
+
+    </div>
+
+    <div class="response-container">
+        <h2>Your Feed</h2>
+        <div id="responsesContainer"></div>
+    </div>
+
+    <script>
+        document.getElementById('responseForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var responseText = document.getElementById('responseInput').value;
+            if (responseText.trim() !== '') {
+                var responseElement = document.createElement('div');
+                responseElement.className = 'response';
+                responseElement.textContent = responseText;
+
+                var deleteButton = document.createElement('img');
+                deleteButton.className = 'delete-btn';
+                deleteButton.src = 'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/027/original/delete.png?1706888643';
+                deleteButton.alt = 'Delete';
+                deleteButton.onclick = function () {
+                    responseElement.remove();
+                };
+
+                var likeButton = document.createElement('img');
+                likeButton.className = 'like-btn';
+                likeButton.src = 'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/029/original/heart.png?1706888679'; // Replace with the path to your like image
+                likeButton.alt = 'Like';
+                likeButton.onclick = function () {
+                    // Implement your like functionality here
+                    likeButton.src = 'https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/064/025/original/state_clicked.png?1706888455'; // Replace with the path to your liked image
+                };
+
+                var replyButton = document.createElement('button');
+                replyButton.className = 'reply-btn';
+                replyButton.textContent = 'Reply';
+                replyButton.onclick = function () {
+                    // Implement your reply functionality here
+                    alert('Replying!');
+                };
+
+                responseElement.appendChild(deleteButton);
+                responseElement.appendChild(likeButton);
+                responseElement.appendChild(replyButton);
+
+                document.getElementById('responsesContainer').appendChild(responseElement);
+                document.getElementById('responseInput').value = '';
+
+                
+            }
+        });
+    </script>
+</body>
+
+</html>
+
